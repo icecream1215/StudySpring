@@ -8,7 +8,9 @@ import hello.core.member.MemberServiceImpl;
 public class MemberApp {
     //main 메서드로 확인하는건 한계가 있음.... junit 써야함...
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
+        //MemberService memberService = new MemberServiceImpl();
         Member member =new Member(1L,"memberA", Grade.VIP);
         memberService.join(member);
 
