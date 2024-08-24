@@ -3,7 +3,7 @@ package hello.core.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-public class NetworkClient implements InitializingBean, DisposableBean {
+public class NetworkClient {
     // 가짜 네트워크 클라이언트임~~~ 로그로 라이프사이클 확인만
 
      private String url;
@@ -35,7 +35,7 @@ public class NetworkClient implements InitializingBean, DisposableBean {
          System.out.println("close : " + url);
      }
 
-
+     /* implements InitializingBean, DisposableBean  사용할때
     @Override
     public void afterPropertiesSet() throws Exception {
         // 의존관계 주입 끝나면 호출하는 메서드
@@ -47,6 +47,20 @@ public class NetworkClient implements InitializingBean, DisposableBean {
     @Override
     public void destroy() throws Exception {
          // 소멸전에 호출하는 메서드
+        System.out.println("NetworkClient.destroy");
+        disconnect();
+    }
+    */
+
+    public void init() {
+        // 의존관계 주입 끝나면 호출하는 메서드
+        System.out.println("NetworkClient.init");
+        connect();
+        call("초기화 연결 메세지");
+    }
+
+    public void close() {
+        // 소멸전에 호출하는 메서드
         System.out.println("NetworkClient.destroy");
         disconnect();
     }
